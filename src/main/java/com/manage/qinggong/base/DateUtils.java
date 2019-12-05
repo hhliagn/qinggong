@@ -49,12 +49,12 @@ public class DateUtils {
 
     public static List<Date> beginAndEndOfYear(){
         List<Date> list = new ArrayList<>();
-        cale.add(Calendar.MONTH, 0);
-        cale.set(Calendar.DAY_OF_MONTH, 1);
+        Date now = new Date();
+        cale.setTime(now);
+        cale.set(Calendar.DAY_OF_YEAR, 1);
         Date begin = cale.getTime();
-
-        cale.add(Calendar.MONTH, 1);
-        cale.set(Calendar.DAY_OF_MONTH, 0);
+        cale.add(Calendar.YEAR, 1);
+        cale.set(Calendar.DAY_OF_YEAR, -1);
         Date end = cale.getTime();
         list.add(begin);
         list.add(end);

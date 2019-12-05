@@ -41,7 +41,7 @@ public class StatsService {
     }
 
     public static void main(String[] args) {
-        List<Date> dates = DateUtils.beginAndEndOfMonth();
+        List<Date> dates = DateUtils.beginAndEndOfYear();
         System.out.println(dates);
     }
 }
