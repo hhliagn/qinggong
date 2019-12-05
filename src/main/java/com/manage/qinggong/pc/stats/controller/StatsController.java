@@ -18,18 +18,12 @@ public class StatsController {
 
     @PostMapping(value = "")
     public Response dayStats(@RequestParam("type") int type){
-        if (type == 0 || type > 2){
-            return new Response("参数错误");
-        }
+        if (type == 0 || type > 2)  return new Response("参数错误");
         try {
             Long count = 0L;
-            if (type == 0){
-                count = statsService.dayStats();
-            }else if (type == 1){
-                count = statsService.monthStats();
-            }else {
-                count = statsService.yearStats();
-            }
+            if (type == 0) count = statsService.dayStats();
+            else if (type == 1) count = statsService.monthStats();
+            else count = statsService.yearStats();
             return new Response("统计成功", count);
         }catch (Exception e){
             return new Response("统计当日数据出错");

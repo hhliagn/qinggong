@@ -23,9 +23,7 @@ public class OrderController {
 
     @PostMapping(value = "")
     public Response submitOrder(@RequestBody Order order){
-        if (order == null){
-            return new Response("预约信息为空");
-        }
+        if (order == null) return new Response("预约信息为空");
         //加判断，是否该时间可以预约 并且 该时间段人数未满
         Date orderDate = order.getOrderDate();
         String orderTime = order.getOrderTime();

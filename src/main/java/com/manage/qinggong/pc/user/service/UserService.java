@@ -23,9 +23,7 @@ public class UserService {
         UserExample.Criteria criteria = example.createCriteria();
         criteria.andUserNameEqualTo(userName);
         List<User> users = userMapper.selectByExample(example);
-        if (users != null && users.size() > 0){
-            return users.get(0);
-        }
+        if (users != null && users.size() > 0) return users.get(0);
         return null;
     }
 }

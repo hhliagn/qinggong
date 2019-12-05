@@ -13,9 +13,7 @@ public class DateUtils {
     public static Integer dayOfWeek(Date date){
         cale.setTime(date);
         int i = cale.get(Calendar.DAY_OF_WEEK);
-        if (i == 1){
-            return 7;
-        }
+        if (i == 1) return 7;
         return i - 1;
     }
 
