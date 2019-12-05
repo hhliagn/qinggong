@@ -1,0 +1,20 @@
+server:
+  port: 9999
+spring:
+  datasource:
+    url: jdbc:mysql://127.0.0.1:3306/qinggong?useUnicode=true&characterEncoding=utf8&useSSL=false
+    driver-class-name: com.mysql.jdbc.Driver
+    username: root
+    password: Gzbd2020
+    type: com.alibaba.druid.pool.DruidDataSource
+    druid:
+      initial-size: 5
+      max-active: 20
+      min-idle: 5
+      max-wait: 6000
+mybatis:
+  mapper-locations: classpath:mapping/*.xml,classpath:mapping/*/*.xml
+logging:
+  level:
+    com.manage.qinggong:
+      debug

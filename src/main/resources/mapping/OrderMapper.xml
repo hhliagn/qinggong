@@ -1,0 +1,306 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.manage.qinggong.app.order.mapper.OrderMapper">
+  <resultMap id="BaseResultMap" type="com.manage.qinggong.app.order.pojo.Order">
+    <id column="order_id" jdbcType="INTEGER" property="orderId" />
+    <result column="order_type" jdbcType="INTEGER" property="orderType" />
+    <result column="order_count" jdbcType="BIGINT" property="orderCount" />
+    <result column="order_user_name" jdbcType="VARCHAR" property="orderUserName" />
+    <result column="order_user_age" jdbcType="INTEGER" property="orderUserAge" />
+    <result column="order_user_phone" jdbcType="VARCHAR" property="orderUserPhone" />
+    <result column="order_party" jdbcType="VARCHAR" property="orderParty" />
+    <result column="order_date" jdbcType="TIMESTAMP" property="orderDate" />
+    <result column="order_time" jdbcType="VARCHAR" property="orderTime" />
+    <result column="status" jdbcType="INTEGER" property="status" />
+    <result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
+  </resultMap>
+  <sql id="Example_Where_Clause">
+    <where>
+      <foreach collection="oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause">
+    <where>
+      <foreach collection="example.oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List">
+    order_id, order_type, order_count, order_user_name, order_user_age, order_user_phone, 
+    order_party, order_date, order_time, status, create_time
+  </sql>
+  <select id="selectByExample" parameterType="com.manage.qinggong.app.order.pojo.OrderExample" resultMap="BaseResultMap">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from order
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from order
+    where order_id = #{orderId,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from order
+    where order_id = #{orderId,jdbcType=INTEGER}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.manage.qinggong.app.order.pojo.OrderExample">
+    delete from order
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.manage.qinggong.app.order.pojo.Order">
+    insert into order (order_id, order_type, order_count, 
+      order_user_name, order_user_age, order_user_phone, 
+      order_party, order_date, order_time, 
+      status, create_time)
+    values (#{orderId,jdbcType=INTEGER}, #{orderType,jdbcType=INTEGER}, #{orderCount,jdbcType=BIGINT}, 
+      #{orderUserName,jdbcType=VARCHAR}, #{orderUserAge,jdbcType=INTEGER}, #{orderUserPhone,jdbcType=VARCHAR}, 
+      #{orderParty,jdbcType=VARCHAR}, #{orderDate,jdbcType=TIMESTAMP}, #{orderTime,jdbcType=VARCHAR}, 
+      #{status,jdbcType=INTEGER}, #{createTime,jdbcType=TIMESTAMP})
+  </insert>
+  <insert id="insertSelective" parameterType="com.manage.qinggong.app.order.pojo.Order">
+    insert into order
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="orderId != null">
+        order_id,
+      </if>
+      <if test="orderType != null">
+        order_type,
+      </if>
+      <if test="orderCount != null">
+        order_count,
+      </if>
+      <if test="orderUserName != null">
+        order_user_name,
+      </if>
+      <if test="orderUserAge != null">
+        order_user_age,
+      </if>
+      <if test="orderUserPhone != null">
+        order_user_phone,
+      </if>
+      <if test="orderParty != null">
+        order_party,
+      </if>
+      <if test="orderDate != null">
+        order_date,
+      </if>
+      <if test="orderTime != null">
+        order_time,
+      </if>
+      <if test="status != null">
+        status,
+      </if>
+      <if test="createTime != null">
+        create_time,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="orderId != null">
+        #{orderId,jdbcType=INTEGER},
+      </if>
+      <if test="orderType != null">
+        #{orderType,jdbcType=INTEGER},
+      </if>
+      <if test="orderCount != null">
+        #{orderCount,jdbcType=BIGINT},
+      </if>
+      <if test="orderUserName != null">
+        #{orderUserName,jdbcType=VARCHAR},
+      </if>
+      <if test="orderUserAge != null">
+        #{orderUserAge,jdbcType=INTEGER},
+      </if>
+      <if test="orderUserPhone != null">
+        #{orderUserPhone,jdbcType=VARCHAR},
+      </if>
+      <if test="orderParty != null">
+        #{orderParty,jdbcType=VARCHAR},
+      </if>
+      <if test="orderDate != null">
+        #{orderDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="orderTime != null">
+        #{orderTime,jdbcType=VARCHAR},
+      </if>
+      <if test="status != null">
+        #{status,jdbcType=INTEGER},
+      </if>
+      <if test="createTime != null">
+        #{createTime,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.manage.qinggong.app.order.pojo.OrderExample" resultType="java.lang.Long">
+    select count(*) from order
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map">
+    update order
+    <set>
+      <if test="record.orderId != null">
+        order_id = #{record.orderId,jdbcType=INTEGER},
+      </if>
+      <if test="record.orderType != null">
+        order_type = #{record.orderType,jdbcType=INTEGER},
+      </if>
+      <if test="record.orderCount != null">
+        order_count = #{record.orderCount,jdbcType=BIGINT},
+      </if>
+      <if test="record.orderUserName != null">
+        order_user_name = #{record.orderUserName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.orderUserAge != null">
+        order_user_age = #{record.orderUserAge,jdbcType=INTEGER},
+      </if>
+      <if test="record.orderUserPhone != null">
+        order_user_phone = #{record.orderUserPhone,jdbcType=VARCHAR},
+      </if>
+      <if test="record.orderParty != null">
+        order_party = #{record.orderParty,jdbcType=VARCHAR},
+      </if>
+      <if test="record.orderDate != null">
+        order_date = #{record.orderDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.orderTime != null">
+        order_time = #{record.orderTime,jdbcType=VARCHAR},
+      </if>
+      <if test="record.status != null">
+        status = #{record.status,jdbcType=INTEGER},
+      </if>
+      <if test="record.createTime != null">
+        create_time = #{record.createTime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map">
+    update order
+    set order_id = #{record.orderId,jdbcType=INTEGER},
+      order_type = #{record.orderType,jdbcType=INTEGER},
+      order_count = #{record.orderCount,jdbcType=BIGINT},
+      order_user_name = #{record.orderUserName,jdbcType=VARCHAR},
+      order_user_age = #{record.orderUserAge,jdbcType=INTEGER},
+      order_user_phone = #{record.orderUserPhone,jdbcType=VARCHAR},
+      order_party = #{record.orderParty,jdbcType=VARCHAR},
+      order_date = #{record.orderDate,jdbcType=TIMESTAMP},
+      order_time = #{record.orderTime,jdbcType=VARCHAR},
+      status = #{record.status,jdbcType=INTEGER},
+      create_time = #{record.createTime,jdbcType=TIMESTAMP}
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.manage.qinggong.app.order.pojo.Order">
+    update order
+    <set>
+      <if test="orderType != null">
+        order_type = #{orderType,jdbcType=INTEGER},
+      </if>
+      <if test="orderCount != null">
+        order_count = #{orderCount,jdbcType=BIGINT},
+      </if>
+      <if test="orderUserName != null">
+        order_user_name = #{orderUserName,jdbcType=VARCHAR},
+      </if>
+      <if test="orderUserAge != null">
+        order_user_age = #{orderUserAge,jdbcType=INTEGER},
+      </if>
+      <if test="orderUserPhone != null">
+        order_user_phone = #{orderUserPhone,jdbcType=VARCHAR},
+      </if>
+      <if test="orderParty != null">
+        order_party = #{orderParty,jdbcType=VARCHAR},
+      </if>
+      <if test="orderDate != null">
+        order_date = #{orderDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="orderTime != null">
+        order_time = #{orderTime,jdbcType=VARCHAR},
+      </if>
+      <if test="status != null">
+        status = #{status,jdbcType=INTEGER},
+      </if>
+      <if test="createTime != null">
+        create_time = #{createTime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where order_id = #{orderId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.manage.qinggong.app.order.pojo.Order">
+    update order
+    set order_type = #{orderType,jdbcType=INTEGER},
+      order_count = #{orderCount,jdbcType=BIGINT},
+      order_user_name = #{orderUserName,jdbcType=VARCHAR},
+      order_user_age = #{orderUserAge,jdbcType=INTEGER},
+      order_user_phone = #{orderUserPhone,jdbcType=VARCHAR},
+      order_party = #{orderParty,jdbcType=VARCHAR},
+      order_date = #{orderDate,jdbcType=TIMESTAMP},
+      order_time = #{orderTime,jdbcType=VARCHAR},
+      status = #{status,jdbcType=INTEGER},
+      create_time = #{createTime,jdbcType=TIMESTAMP}
+    where order_id = #{orderId,jdbcType=INTEGER}
+  </update>
+</mapper>

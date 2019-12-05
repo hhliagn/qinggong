@@ -1,0 +1,142 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE generatorConfiguration
+        PUBLIC "-//mybatis.org//DTD MyBatis Generator Configuration 1.0//EN"
+        "http://mybatis.org/dtd/mybatis-generator-config_1_0.dtd">
+<generatorConfiguration>
+    <!-- 数据库驱动:选择你的本地硬盘上面的数据库驱动包-->
+    <classPathEntry  location="C:\\Users\\Administrator\\.m2\\repository\\mysql\\mysql-connector-java\\5.1.44\\mysql-connector-java-5.1.44.jar"/>
+    <context id="MysqlTables"  targetRuntime="MyBatis3">
+		<plugin type="my.mybatis.plugin.BaseMapperGeneratorPlugin"></plugin>
+		<!--<plugin type="my.mybatis.plugin.ExtendMapperPlugin">
+			<property name="targetProject" value=".\src\main\java"/>
+			<property name="targetPackage" value="com.judamax.jumaxmember.mapper"/>
+			<property name="extendTargetPackage" value="com.judamax.jumaxmember.mapper.extend"/>
+			<property name="extendMapperXmlPath" value="src/main/resources/mapping/extend"/>
+		</plugin>-->
+        <commentGenerator>
+            <property name="suppressDate" value="true"/>
+            <!-- 是否去除自动生成的注释 true：是 ： false:否 -->
+            <property name="suppressAllComments" value="true"/>
+        </commentGenerator>
+        <!--数据库链接URL，用户名、密码 -->
+        <!--数据库连接的信息：驱动类、连接地址、用户名、密码 -->
+		<jdbcConnection driverClass="com.mysql.jdbc.Driver"
+			connectionURL="jdbc:mysql://127.0.0.1:3306/qinggong?useSSL=false"
+			userId="root"
+			password="Gzbd2020">
+			<!--设置可以获取tables remarks信息-->
+			<!--<property name="useInformationSchema" value="true"/>-->
+		</jdbcConnection>
+		<!-- 默认false，把JDBC DECIMAL 和 NUMERIC 类型解析为 Integer，为 true时把JDBC DECIMAL 和 
+			NUMERIC 类型解析为java.math.BigDecimal -->
+		<javaTypeResolver>
+			<property name="forceBigDecimals" value="false" />
+		</javaTypeResolver>
+
+		<!-- targetProject:生成PO类的位置 -->
+		<javaModelGenerator targetPackage="com.manage.qinggong.app.order.pojo"
+			targetProject=".\src\main\java">
+			<!-- enableSubPackages:是否让schema作为包的后缀 -->
+			<property name="enableSubPackages" value="false" />
+			<!-- 从数据库返回的值被清理前后的空格 -->
+			<property name="trimStrings" value="true" />
+		</javaModelGenerator>
+        <!-- targetProject:mapper映射文件生成的位置 -->
+		<sqlMapGenerator targetPackage="mapping"
+			targetProject=".\src\main\resources">
+			<!-- enableSubPackages:是否让schema作为包的后缀 -->
+			<property name="enableSubPackages" value="false" />
+		</sqlMapGenerator>
+		<!-- targetPackage：mapper接口生成的位置 -->
+		<javaClientGenerator type="XMLMAPPER"
+			targetPackage="com.manage.qinggong.app.order.mapper"
+			targetProject=".\src\main\java">
+			<!-- enableSubPackages:是否让schema作为包的后缀 -->
+			<property name="enableSubPackages" value="false" />
+
+		</javaClientGenerator>
+
+		<!--<table schema="" tableName="jumax_member">-->
+			<!--<domainObjectRenamingRule searchString="^Jumax" replaceString="" />-->
+		<!--</table>-->
+		<!--<table schema="" tableName="sale_order">-->
+			<!--<domainObjectRenamingRule searchString="^Jumax" replaceString="" />-->
+		<!--</table>-->
+		<!--<table schema="" tableName="jumax_member_cancel_log">-->
+			<!--<domainObjectRenamingRule searchString="^Jumax" replaceString="" />-->
+		<!--</table>-->
+		<!--<table schema="" tableName="jumax_notice">-->
+			<!--<domainObjectRenamingRule searchString="^Jumax" replaceString="" />-->
+		<!--</table>
+        <table schema="" tableName="jumax_member_change_bind">
+            <domainObjectRenamingRule searchString="^Jumax" replaceString="" />
+        </table>
+        <table schema="" tableName="jumax_member_change_bind_check">
+            <domainObjectRenamingRule searchString="^Jumax" replaceString="" />
+        </table>
+        <table schema="" tableName="jumax_member_change_bind_item">
+            <domainObjectRenamingRule searchString="^Jumax" replaceString="" />
+        </table>
+        <table schema="" tableName="jumax_member_change_bind_resource">
+            <domainObjectRenamingRule searchString="^Jumax" replaceString="" />
+        </table>-->
+        <!--<table schema="" tableName="jumax_wxgzh_passive_reply">
+            <domainObjectRenamingRule searchString="^Jumax" replaceString="" />
+        </table>
+        <table schema="" tableName="jumax_wxgzh_passive_reply_log">
+            <domainObjectRenamingRule searchString="^Jumax" replaceString="" />
+        </table>
+        <table schema="" tableName="jumax_wxgzh_follow_log">
+            <domainObjectRenamingRule searchString="^Jumax" replaceString="" />
+        </table>
+		<table schema="" tableName="jumax_wxgzh_passive_reply_subsidiary">
+            <domainObjectRenamingRule searchString="^Jumax" replaceString="" />
+        </table>
+
+		<table schema="" tableName="idempotent_subsidiary">
+			<domainObjectRenamingRule searchString="^Jumax" replaceString="" />
+		</table>
+		<table schema="" tableName="jumax_search_word_summary">
+			<domainObjectRenamingRule searchString="^Jumax" replaceString="" />
+		</table>
+		<table schema="" tableName="jumax_search_record">
+			<domainObjectRenamingRule searchString="^Jumax" replaceString="" />
+		</table>-->
+
+		<table schema="" tableName="order">
+			<!--<domainObjectRenamingRule searchString="^Jumax" replaceString="" />-->
+		</table>
+		<!-- 指定数据库表 -->
+		<!-- <table schema="" tableName="t_attachment"></table>
+
+		<table tableName="t_%">
+			<generatedKey column="id" sqlStatement="Mysql" identity="true" />
+			<domainObjectRenamingRule searchString="^T" replaceString="" />
+			<columnOverride column="content" jdbcType="VARCHAR" />
+		</table>
+
+
+		<table tableName="tblCompanyEmployeeDet">
+			<generatedKey column="id" sqlStatement="SqlServer" identity="false" />
+			<domainObjectRenamingRule searchString="^tbl" replaceString="" />
+			<ignoreColumnsByRegex pattern="(?i).*">
+				<except column="username"/>
+				<except column="password"/>
+				<except column="logincount"/>
+				<except column="lastlogintime"/>
+				<except column="headimg"/>
+				<except column="id"/>
+				<except column="ContactMan"/>
+				<except column="Mobile"/>
+				<except column="f_ref"/>
+			</ignoreColumnsByRegex>
+		</table>
+		<table tableName="tblCompanyShippingAddress">
+			<generatedKey column="id" sqlStatement="SqlServer" identity="false" />
+			<domainObjectRenamingRule searchString="^tbl" replaceString="" />
+
+		</table>
+	-->
+
+	</context>
+</generatorConfiguration>
