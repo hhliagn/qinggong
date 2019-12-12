@@ -37,7 +37,21 @@ public class DateUtils {
         return list;
     }
 
-    //
+    public static List<Date> beginAndEndOfMonth(){
+        List<Date> list = new ArrayList<>();
+        cale.add(Calendar.MONTH, 0);
+        cale.set(Calendar.DAY_OF_MONTH, 1);
+        Date begin = cale.getTime();
+
+        cale.add(Calendar.MONTH, 1);
+        cale.set(Calendar.DAY_OF_MONTH, 0);
+        Date end = cale.getTime();
+        list.add(begin);
+        list.add(end);
+        return list;
+    }
+
+    //某一天的开始和结束
     public static List<Date> beginAndEndOfDaySpec(Date date){
         List<Date> list = new ArrayList<>();
         cale.setTime(date);
@@ -56,20 +70,6 @@ public class DateUtils {
         return list;
     }
 
-    public static List<Date> beginAndEndOfMonth(){
-        List<Date> list = new ArrayList<>();
-        cale.add(Calendar.MONTH, 0);
-        cale.set(Calendar.DAY_OF_MONTH, 1);
-        Date begin = cale.getTime();
-
-        cale.add(Calendar.MONTH, 1);
-        cale.set(Calendar.DAY_OF_MONTH, 0);
-        Date end = cale.getTime();
-        list.add(begin);
-        list.add(end);
-        return list;
-    }
-
     //某一年某一月的开始和结束
     public static List<Date> beginAndEndOfMonthSpec(Date date){
         List<Date> list = new ArrayList<>();
@@ -80,6 +80,10 @@ public class DateUtils {
 
         cale.add(Calendar.MONTH, 1);
         cale.set(Calendar.DAY_OF_MONTH, 0);
+        cale.set(Calendar.HOUR_OF_DAY, 23);
+        cale.set(Calendar.MINUTE, 59);
+        cale.set(Calendar.SECOND, 59);
+        cale.set(Calendar.MILLISECOND, 999);
         Date end = cale.getTime();
         list.add(begin);
         list.add(end);
@@ -94,6 +98,10 @@ public class DateUtils {
         Date begin = cale.getTime();
         cale.add(Calendar.YEAR, 1);
         cale.set(Calendar.DAY_OF_YEAR, -1);
+        cale.set(Calendar.HOUR_OF_DAY, 23);
+        cale.set(Calendar.MINUTE, 59);
+        cale.set(Calendar.SECOND, 59);
+        cale.set(Calendar.MILLISECOND, 999);
         Date end = cale.getTime();
         list.add(begin);
         list.add(end);

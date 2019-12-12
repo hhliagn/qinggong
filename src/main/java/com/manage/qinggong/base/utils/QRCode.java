@@ -113,7 +113,8 @@ public class QRCode {
         long millis = System.currentTimeMillis();
         if(destPath == null || destPath.equals(""))
             destPath = "D:\\QRcode\\" + millis + ".jpg";
-        FileUtil.mkdirs(destPath);
+        File file = new File(destPath);
+        if (!file.isDirectory()) file.mkdirs();
         ImageIO.write(image, FORMAT, new File(destPath));
         return destPath;
     }

@@ -42,6 +42,7 @@ public class OrderService {
         String orderTime = order.getOrderTime();
         String date = DateUtils.dateToStr(orderDate, "yyyy-MM-dd");
         Integer dayOfWeek = DateUtils.dayOfWeek(orderDate);
+
         //查询开馆时间 place_setup open_time
         PlaceSetup placeSetup = placeSetupMapper.selectByPrimaryKey(1);
         if (placeSetup == null) return new Response("展馆未设置", ErrorCode.ERROR);
@@ -64,6 +65,7 @@ public class OrderService {
         Object o = new Object();
         boolean flag = true;
         synchronized (o){
+            //12-12 fix:提交预约的时候根据 order_date,order_time 查出所有 order,累加 order_count 和 limit 比较。
             OrderExample example1 = new OrderExample();
             OrderExample.Criteria criteria1 = example1.createCriteria();
             List<Date> dates = DateUtils.beginAndEndOfDaySpec(orderDate);
