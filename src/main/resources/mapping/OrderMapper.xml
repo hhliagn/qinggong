@@ -119,6 +119,85 @@
       #{status,jdbcType=INTEGER}, #{createTime,jdbcType=TIMESTAMP}, #{passed,jdbcType=BIGINT}
       )
   </insert>
+  <insert id="insertAndGet" parameterType="com.manage.qinggong.app.order.pojo.Order" keyProperty="orderId" useGeneratedKeys="true">
+    insert into t_order
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="orderId != null">
+        order_id,
+      </if>
+      <if test="orderType != null">
+        order_type,
+      </if>
+      <if test="orderCount != null">
+        order_count,
+      </if>
+      <if test="orderUserName != null">
+        order_user_name,
+      </if>
+      <if test="orderUserAge != null">
+        order_user_age,
+      </if>
+      <if test="orderUserPhone != null">
+        order_user_phone,
+      </if>
+      <if test="orderParty != null">
+        order_party,
+      </if>
+      <if test="orderDate != null">
+        order_date,
+      </if>
+      <if test="orderTime != null">
+        order_time,
+      </if>
+      <if test="status != null">
+        status,
+      </if>
+      <if test="createTime != null">
+        create_time,
+      </if>
+      <if test="passed != null">
+        passed,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="orderId != null">
+        #{orderId,jdbcType=INTEGER},
+      </if>
+      <if test="orderType != null">
+        #{orderType,jdbcType=INTEGER},
+      </if>
+      <if test="orderCount != null">
+        #{orderCount,jdbcType=BIGINT},
+      </if>
+      <if test="orderUserName != null">
+        #{orderUserName,jdbcType=VARCHAR},
+      </if>
+      <if test="orderUserAge != null">
+        #{orderUserAge,jdbcType=INTEGER},
+      </if>
+      <if test="orderUserPhone != null">
+        #{orderUserPhone,jdbcType=VARCHAR},
+      </if>
+      <if test="orderParty != null">
+        #{orderParty,jdbcType=VARCHAR},
+      </if>
+      <if test="orderDate != null">
+        #{orderDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="orderTime != null">
+        #{orderTime,jdbcType=VARCHAR},
+      </if>
+      <if test="status != null">
+        #{status,jdbcType=INTEGER},
+      </if>
+      <if test="createTime != null">
+        #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="passed != null">
+        #{passed,jdbcType=BIGINT},
+      </if>
+    </trim>
+  </insert>
   <insert id="insertSelective" parameterType="com.manage.qinggong.app.order.pojo.Order">
     insert into t_order
     <trim prefix="(" suffix=")" suffixOverrides=",">

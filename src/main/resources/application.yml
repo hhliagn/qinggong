@@ -17,12 +17,23 @@ spring:
       force: true
       charset: utf-8
       enabled: true
+  redis:
+    host: 127.0.0.1
+    port: 6379
+    # Redis最大连接数
+    maxTotal: 100
+    # Redis最大最小空闲连接数
+    maxIdle: 50
+    minIdle: 20
+    timeout: 3000
 mybatis:
   mapper-locations: classpath:mapping/*.xml,classpath:mapping/*/*.xml
 logging:
   level:
     com.manage.qinggong:
       debug
+user:
+  prop: D:/user.txt
 #verify:
 #  url:
 ##    http://localhost:9999/order/decodeQR?orderUserName=%s&orderDateStr=%s&orderTime=%s

@@ -132,4 +132,23 @@ public class Order {
     public void setPassed(Long passed) {
         this.passed = passed;
     }
+
+    @Override
+    public String toString() {
+        return "Order{" +
+                "orderId=" + orderId +
+                ", orderType=" + orderType +
+                ", orderCount=" + orderCount +
+                ", orderUserName='" + orderUserName + '\'' +
+                ", orderUserAge=" + orderUserAge +
+                ", orderUserPhone='" + orderUserPhone + '\'' +
+                ", orderParty='" + orderParty + '\'' +
+                ", orderDate=" + orderDate +
+                ", orderDateStr='" + orderDateStr + '\'' +
+                ", orderTime='" + orderTime + '\'' +
+                ", status=" + status +
+                ", createTime=" + createTime +
+                ", passed=" + passed +
+                '}';
+    }
 }

@@ -6,6 +6,7 @@ import com.manage.qinggong.app.order.pojo.OrderExample;
 import com.manage.qinggong.base.pojo.ErrorCode;
 import com.manage.qinggong.base.pojo.Response;
 import com.manage.qinggong.base.utils.DateUtils;
+import com.manage.qinggong.base.utils.RedisService;
 import com.manage.qinggong.pc.place.mapper.OrderPeriodMapper;
 import com.manage.qinggong.pc.place.mapper.PlaceSetupMapper;
 import com.manage.qinggong.pc.place.pojo.OrderPeriod;
@@ -32,6 +33,8 @@ public class OrderService {
     private OrderPeriodMapper orderPeriodMapper;
     @Autowired
     private PlaceSetupMapper placeSetupMapper;
+    @Autowired
+    private RedisService redisService;
     public Response submitOrder(Order order) {
         //加判断，是否该时间可以预约 并且 该时间段人数未满
         String orderUserName = order.getOrderUserName();
@@ -85,54 +88,81 @@ public class OrderService {
             if (flag) {
                 order.setStatus(0);
                 order.setCreateTime(new Date());
-                int i = orderMapper.insert(order);
+                int i = orderMapper.insertAndGet(order);
                 if (i < 0) return new Response("提交预约失败", ErrorCode.ERROR);
             }
         }
-        return new Response("提交预约成功", ErrorCode.SUCCESS);
+        return new Response("提交预约成功", ErrorCode.SUCCESS, order.getOrderId());
     }
 
-    public boolean verify(Order order) {
-        String userName = order.getOrderUserName();
-        String orderDateStr = order.getOrderDateStr();
-        String orderTime = order.getOrderTime();
-        Long orderCount = order.getOrderCount();
-        Date orderDate = null;
-        try {
-            orderDate = DateUtils.strToDate(orderDateStr, "yyyy-MM-dd");
-        } catch (ParseException e) {
-            e.printStackTrace();
-        }
-        OrderExample example = new OrderExample();
-        OrderExample.Criteria c = example.createCriteria();
-        c.andOrderUserNameEqualTo(userName);
-        List<Date> dates = DateUtils.beginAndEndOfDaySpec(orderDate);
-        Date begin = dates.get(0);
-        Date end = dates.get(1);
-        c.andOrderDateBetween(begin, end);
-        c.andOrderTimeEqualTo(orderTime);
-        c.andOrderCountEqualTo(orderCount);
+//    public boolean verify(Order order) {
+//        Integer orderId = order.getOrderId();
+//        if (orderId == null || orderId <= 0) return false;
+//        String userName = order.getOrderUserName();
+//        String orderDateStr = order.getOrderDateStr();
+//        String orderTime = order.getOrderTime();
+//        Long orderCount = order.getOrderCount();
+//        Date orderDate = null;
+//        try {
+//            orderDate = DateUtils.strToDate(orderDateStr, "yyyy-MM-dd");
+//        } catch (ParseException e) {
+//            e.printStackTrace();
+//        }
+//        OrderExample example = new OrderExample();
+//        OrderExample.Criteria c = example.createCriteria();
+//        c.andOrderUserNameEqualTo(userName);
+//        List<Date> dates = DateUtils.beginAndEndOfDaySpec(orderDate);
+//        Date begin = dates.get(0);
+//        Date end = dates.get(1);
+//        c.andOrderDateBetween(begin, end);
+//        c.andOrderTimeEqualTo(orderTime);
+//        c.andOrderCountEqualTo(orderCount);
+//
+//        Object o = new Object();
+//        synchronized (o){
+//            //查询可以有多少人通过
+//            List<Order> orders = orderMapper.selectByExample(example);
+//            if (CollectionUtils.isEmpty(orders)) return false;
+//            Order order1 = orders.get(0);
+//            Long orderCount1 = order1.getOrderCount();
+//            Long passed = order1.getPassed();
+//            if (passed >= orderCount1) {
+//                order1.setStatus(1);
+//                orderMapper.updateByPrimaryKeySelective(order1);
+//                return false;
+//            }
+//            passed += 1;
+//            order1.setPassed(passed);
+//            orderMapper.updateByPrimaryKeySelective(order1);
+//            if (passed >= orderCount){
+//                order1.setStatus(1);
+//                orderMapper.updateByPrimaryKeySelective(order1);
+//            }
+//            return true;
+//        }
+//    }
 
+    public boolean verify(Order order) {
+        Integer orderId = order.getOrderId();
+        Long orderCount = order.getOrderCount();
+        if (orderId == null || orderId <= 0) return false;
         Object o = new Object();
         synchronized (o){
             //查询可以有多少人通过
-            List<Order> orders = orderMapper.selectByExample(example);
-            if (CollectionUtils.isEmpty(orders)) return false;
-            Order order1 = orders.get(0);
-            Long orderCount1 = order1.getOrderCount();
-            Long passed = order1.getPassed();
-            if (passed >= orderCount1) {
-                order1.setStatus(1);
-                orderMapper.updateByPrimaryKeySelective(order1);
+            Long passed = null;
+            String key = "order_" + orderId;
+            passed = (Long) redisService.get(key);
+            if (passed == null) passed = 0L;
+            if (passed >= orderCount) {
+                Order order2 = orderMapper.selectByPrimaryKey(orderId);
+                if (order2 == null) return false;
+                order2.setStatus(1);
+                order2.setPassed(orderCount);
+                orderMapper.updateByPrimaryKeySelective(order2);
                 return false;
             }
-            passed += 1;
-            order1.setPassed(passed);
-            orderMapper.updateByPrimaryKeySelective(order1);
-            if (passed >= orderCount){
-                order1.setStatus(1);
-                orderMapper.updateByPrimaryKeySelective(order1);
-            }
+            passed ++;
+            redisService.set(key, passed, 5*60);
             return true;
         }
     }

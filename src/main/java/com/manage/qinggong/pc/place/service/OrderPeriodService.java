@@ -23,7 +23,7 @@ public class OrderPeriodService {
     public boolean add(OrderPeriod orderPeriod) {
         orderPeriod.setCreateTime(new Date());
         orderPeriod.setStatus(0);
-        int i = orderPeriodMapper.insert(orderPeriod);
+        int i = orderPeriodMapper.insertSelective(orderPeriod);
         return i > 0;
     }
 }
