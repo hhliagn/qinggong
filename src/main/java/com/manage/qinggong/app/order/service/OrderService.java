@@ -66,12 +66,17 @@ public class OrderService {
         synchronized (o){
             OrderExample example1 = new OrderExample();
             OrderExample.Criteria criteria1 = example1.createCriteria();
-            List<Date> dates = DateUtils.beginAndEndOfDay();
+            List<Date> dates = DateUtils.beginAndEndOfDaySpec(orderDate);
             Date begin = dates.get(0);
             Date end = dates.get(1);
             criteria1.andOrderDateBetween(begin,end);
             criteria1.andOrderTimeEqualTo(orderTime);
-            long hasOrderCount = orderMapper.countByExample(example1);
+            long hasOrderCount = 0L;
+            List<Order> orders = orderMapper.selectByExample(example1);
+            for (Order order1 : orders) {
+                Long orderCount1 = order1.getOrderCount();
+                hasOrderCount += orderCount1;
+            }
             if (limit - hasOrderCount < orderCount) return new Response("预约人数已满", ErrorCode.ERROR);
 
             //查询数据库是否已经有这条预约，如果有不能重复插入

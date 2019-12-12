@@ -37,6 +37,7 @@ public class DateUtils {
         return list;
     }
 
+    //
     public static List<Date> beginAndEndOfDaySpec(Date date){
         List<Date> list = new ArrayList<>();
         cale.setTime(date);
@@ -69,6 +70,7 @@ public class DateUtils {
         return list;
     }
 
+    //某一年某一月的开始和结束
     public static List<Date> beginAndEndOfMonthSpec(Date date){
         List<Date> list = new ArrayList<>();
         cale.setTime(date);
@@ -84,6 +86,7 @@ public class DateUtils {
         return list;
     }
 
+    //某一年的开始和结束
     public static List<Date> beginAndEndOfYearSpec(Date year){
         List<Date> list = new ArrayList<>();
         cale.setTime(year);
