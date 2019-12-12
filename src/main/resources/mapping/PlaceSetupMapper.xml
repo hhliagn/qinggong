@@ -6,6 +6,9 @@
     <result column="open_time" jdbcType="VARCHAR" property="openTime" />
     <result column="close_time" jdbcType="VARCHAR" property="closeTime" />
     <result column="operate_time" jdbcType="VARCHAR" property="operateTime" />
+    <result column="status" jdbcType="INTEGER" property="status" />
+    <result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
+    <result column="update_time" jdbcType="TIMESTAMP" property="updateTime" />
   </resultMap>
   <sql id="Example_Where_Clause">
     <where>
@@ -66,7 +69,7 @@
     </where>
   </sql>
   <sql id="Base_Column_List">
-    id, open_time, close_time, operate_time
+    id, open_time, close_time, operate_time, status, create_time, update_time
   </sql>
   <select id="selectByExample" parameterType="com.manage.qinggong.pc.place.pojo.PlaceSetupExample" resultMap="BaseResultMap">
     select
@@ -100,9 +103,11 @@
   </delete>
   <insert id="insert" parameterType="com.manage.qinggong.pc.place.pojo.PlaceSetup">
     insert into place_setup (id, open_time, close_time, 
-      operate_time)
+      operate_time, status, create_time, 
+      update_time)
     values (#{id,jdbcType=INTEGER}, #{openTime,jdbcType=VARCHAR}, #{closeTime,jdbcType=VARCHAR}, 
-      #{operateTime,jdbcType=VARCHAR})
+      #{operateTime,jdbcType=VARCHAR}, #{status,jdbcType=INTEGER}, #{createTime,jdbcType=TIMESTAMP}, 
+      #{updateTime,jdbcType=TIMESTAMP})
   </insert>
   <insert id="insertSelective" parameterType="com.manage.qinggong.pc.place.pojo.PlaceSetup">
     insert into place_setup
@@ -119,6 +124,15 @@
       <if test="operateTime != null">
         operate_time,
       </if>
+      <if test="status != null">
+        status,
+      </if>
+      <if test="createTime != null">
+        create_time,
+      </if>
+      <if test="updateTime != null">
+        update_time,
+      </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides=",">
       <if test="id != null">
@@ -132,6 +146,15 @@
       </if>
       <if test="operateTime != null">
         #{operateTime,jdbcType=VARCHAR},
+      </if>
+      <if test="status != null">
+        #{status,jdbcType=INTEGER},
+      </if>
+      <if test="createTime != null">
+        #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateTime != null">
+        #{updateTime,jdbcType=TIMESTAMP},
       </if>
     </trim>
   </insert>
@@ -156,6 +179,15 @@
       <if test="record.operateTime != null">
         operate_time = #{record.operateTime,jdbcType=VARCHAR},
       </if>
+      <if test="record.status != null">
+        status = #{record.status,jdbcType=INTEGER},
+      </if>
+      <if test="record.createTime != null">
+        create_time = #{record.createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.updateTime != null">
+        update_time = #{record.updateTime,jdbcType=TIMESTAMP},
+      </if>
     </set>
     <if test="_parameter != null">
       <include refid="Update_By_Example_Where_Clause" />
@@ -166,7 +198,10 @@
     set id = #{record.id,jdbcType=INTEGER},
       open_time = #{record.openTime,jdbcType=VARCHAR},
       close_time = #{record.closeTime,jdbcType=VARCHAR},
-      operate_time = #{record.operateTime,jdbcType=VARCHAR}
+      operate_time = #{record.operateTime,jdbcType=VARCHAR},
+      status = #{record.status,jdbcType=INTEGER},
+      create_time = #{record.createTime,jdbcType=TIMESTAMP},
+      update_time = #{record.updateTime,jdbcType=TIMESTAMP}
     <if test="_parameter != null">
       <include refid="Update_By_Example_Where_Clause" />
     </if>
@@ -183,6 +218,15 @@
       <if test="operateTime != null">
         operate_time = #{operateTime,jdbcType=VARCHAR},
       </if>
+      <if test="status != null">
+        status = #{status,jdbcType=INTEGER},
+      </if>
+      <if test="createTime != null">
+        create_time = #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateTime != null">
+        update_time = #{updateTime,jdbcType=TIMESTAMP},
+      </if>
     </set>
     where id = #{id,jdbcType=INTEGER}
   </update>
@@ -190,7 +234,10 @@
     update place_setup
     set open_time = #{openTime,jdbcType=VARCHAR},
       close_time = #{closeTime,jdbcType=VARCHAR},
-      operate_time = #{operateTime,jdbcType=VARCHAR}
+      operate_time = #{operateTime,jdbcType=VARCHAR},
+      status = #{status,jdbcType=INTEGER},
+      create_time = #{createTime,jdbcType=TIMESTAMP},
+      update_time = #{updateTime,jdbcType=TIMESTAMP}
     where id = #{id,jdbcType=INTEGER}
   </update>
 </mapper>

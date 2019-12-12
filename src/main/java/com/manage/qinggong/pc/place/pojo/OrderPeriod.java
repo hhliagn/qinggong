@@ -7,7 +7,7 @@ public class OrderPeriod {
 
     private String orderTime;
 
-    private Long limit;
+    private Long orderLimit;
 
     private Integer status;
 
@@ -29,12 +29,12 @@ public class OrderPeriod {
         this.orderTime = orderTime == null ? null : orderTime.trim();
     }
 
-    public Long getLimit() {
-        return limit;
+    public Long getOrderLimit() {
+        return orderLimit;
     }
 
-    public void setLimit(Long limit) {
-        this.limit = limit;
+    public void setOrderLimit(Long orderLimit) {
+        this.orderLimit = orderLimit;
     }
 
     public Integer getStatus() {

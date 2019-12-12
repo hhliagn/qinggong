@@ -4,7 +4,7 @@
   <resultMap id="BaseResultMap" type="com.manage.qinggong.pc.place.pojo.OrderPeriod">
     <id column="id" jdbcType="INTEGER" property="id" />
     <result column="order_time" jdbcType="VARCHAR" property="orderTime" />
-    <result column="limit" jdbcType="BIGINT" property="limit" />
+    <result column="order_limit" jdbcType="BIGINT" property="orderLimit" />
     <result column="status" jdbcType="INTEGER" property="status" />
     <result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
   </resultMap>
@@ -67,7 +67,7 @@
     </where>
   </sql>
   <sql id="Base_Column_List">
-    id, order_time, limit, status, create_time
+    id, order_time, order_limit, status, create_time
   </sql>
   <select id="selectByExample" parameterType="com.manage.qinggong.pc.place.pojo.OrderPeriodExample" resultMap="BaseResultMap">
     select
@@ -100,9 +100,9 @@
     </if>
   </delete>
   <insert id="insert" parameterType="com.manage.qinggong.pc.place.pojo.OrderPeriod">
-    insert into order_period (id, order_time, limit, 
+    insert into order_period (id, order_time, order_limit, 
       status, create_time)
-    values (#{id,jdbcType=INTEGER}, #{orderTime,jdbcType=VARCHAR}, #{limit,jdbcType=BIGINT}, 
+    values (#{id,jdbcType=INTEGER}, #{orderTime,jdbcType=VARCHAR}, #{orderLimit,jdbcType=BIGINT}, 
       #{status,jdbcType=INTEGER}, #{createTime,jdbcType=TIMESTAMP})
   </insert>
   <insert id="insertSelective" parameterType="com.manage.qinggong.pc.place.pojo.OrderPeriod">
@@ -114,8 +114,8 @@
       <if test="orderTime != null">
         order_time,
       </if>
-      <if test="limit != null">
-        limit,
+      <if test="orderLimit != null">
+        order_limit,
       </if>
       <if test="status != null">
         status,
@@ -131,8 +131,8 @@
       <if test="orderTime != null">
         #{orderTime,jdbcType=VARCHAR},
       </if>
-      <if test="limit != null">
-        #{limit,jdbcType=BIGINT},
+      <if test="orderLimit != null">
+        #{orderLimit,jdbcType=BIGINT},
       </if>
       <if test="status != null">
         #{status,jdbcType=INTEGER},
@@ -157,8 +157,8 @@
       <if test="record.orderTime != null">
         order_time = #{record.orderTime,jdbcType=VARCHAR},
       </if>
-      <if test="record.limit != null">
-        limit = #{record.limit,jdbcType=BIGINT},
+      <if test="record.orderLimit != null">
+        order_limit = #{record.orderLimit,jdbcType=BIGINT},
       </if>
       <if test="record.status != null">
         status = #{record.status,jdbcType=INTEGER},
@@ -175,7 +175,7 @@
     update order_period
     set id = #{record.id,jdbcType=INTEGER},
       order_time = #{record.orderTime,jdbcType=VARCHAR},
-      limit = #{record.limit,jdbcType=BIGINT},
+      order_limit = #{record.orderLimit,jdbcType=BIGINT},
       status = #{record.status,jdbcType=INTEGER},
       create_time = #{record.createTime,jdbcType=TIMESTAMP}
     <if test="_parameter != null">
@@ -188,8 +188,8 @@
       <if test="orderTime != null">
         order_time = #{orderTime,jdbcType=VARCHAR},
       </if>
-      <if test="limit != null">
-        limit = #{limit,jdbcType=BIGINT},
+      <if test="orderLimit != null">
+        order_limit = #{orderLimit,jdbcType=BIGINT},
       </if>
       <if test="status != null">
         status = #{status,jdbcType=INTEGER},
@@ -203,7 +203,7 @@
   <update id="updateByPrimaryKey" parameterType="com.manage.qinggong.pc.place.pojo.OrderPeriod">
     update order_period
     set order_time = #{orderTime,jdbcType=VARCHAR},
-      limit = #{limit,jdbcType=BIGINT},
+      order_limit = #{orderLimit,jdbcType=BIGINT},
       status = #{status,jdbcType=INTEGER},
       create_time = #{createTime,jdbcType=TIMESTAMP}
     where id = #{id,jdbcType=INTEGER}

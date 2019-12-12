@@ -1,5 +1,7 @@
 package com.manage.qinggong.pc.place.pojo;
 
+import java.util.Date;
+
 public class PlaceSetup {
     private Integer id;
 
@@ -8,6 +10,12 @@ public class PlaceSetup {
     private String closeTime;
 
     private String operateTime;
+
+    private Integer status;
+
+    private Date createTime;
+
+    private Date updateTime;
 
     public Integer getId() {
         return id;
@@ -39,5 +47,29 @@ public class PlaceSetup {
 
     public void setOperateTime(String operateTime) {
         this.operateTime = operateTime == null ? null : operateTime.trim();
+    }
+
+    public Integer getStatus() {
+        return status;
+    }
+
+    public void setStatus(Integer status) {
+        this.status = status;
+    }
+
+    public Date getCreateTime() {
+        return createTime;
+    }
+
+    public void setCreateTime(Date createTime) {
+        this.createTime = createTime;
+    }
+
+    public Date getUpdateTime() {
+        return updateTime;
+    }
+
+    public void setUpdateTime(Date updateTime) {
+        this.updateTime = updateTime;
     }
 }

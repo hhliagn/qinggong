@@ -5,10 +5,12 @@ import com.manage.qinggong.pc.user.pojo.User;
 import com.manage.qinggong.pc.user.pojo.UserExample;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
 @Service
+@Transactional
 public class UserService {
 
     @Autowired

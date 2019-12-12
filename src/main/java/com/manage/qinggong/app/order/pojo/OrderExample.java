@@ -804,6 +804,66 @@ public class OrderExample {
             addCriterion("create_time not between", value1, value2, "createTime");
             return (Criteria) this;
         }
+
+        public Criteria andPassedIsNull() {
+            addCriterion("passed is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andPassedIsNotNull() {
+            addCriterion("passed is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andPassedEqualTo(Long value) {
+            addCriterion("passed =", value, "passed");
+            return (Criteria) this;
+        }
+
+        public Criteria andPassedNotEqualTo(Long value) {
+            addCriterion("passed <>", value, "passed");
+            return (Criteria) this;
+        }
+
+        public Criteria andPassedGreaterThan(Long value) {
+            addCriterion("passed >", value, "passed");
+            return (Criteria) this;
+        }
+
+        public Criteria andPassedGreaterThanOrEqualTo(Long value) {
+            addCriterion("passed >=", value, "passed");
+            return (Criteria) this;
+        }
+
+        public Criteria andPassedLessThan(Long value) {
+            addCriterion("passed <", value, "passed");
+            return (Criteria) this;
+        }
+
+        public Criteria andPassedLessThanOrEqualTo(Long value) {
+            addCriterion("passed <=", value, "passed");
+            return (Criteria) this;
+        }
+
+        public Criteria andPassedIn(List<Long> values) {
+            addCriterion("passed in", values, "passed");
+            return (Criteria) this;
+        }
+
+        public Criteria andPassedNotIn(List<Long> values) {
+            addCriterion("passed not in", values, "passed");
+            return (Criteria) this;
+        }
+
+        public Criteria andPassedBetween(Long value1, Long value2) {
+            addCriterion("passed between", value1, value2, "passed");
+            return (Criteria) this;
+        }
+
+        public Criteria andPassedNotBetween(Long value1, Long value2) {
+            addCriterion("passed not between", value1, value2, "passed");
+            return (Criteria) this;
+        }
     }
 
     public static class Criteria extends GeneratedCriteria {

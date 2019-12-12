@@ -1,6 +1,7 @@
 package com.manage.qinggong.pc.user.controller;
 
-import com.manage.qinggong.base.Response;
+import com.manage.qinggong.base.pojo.ErrorCode;
+import com.manage.qinggong.base.pojo.Response;
 import com.manage.qinggong.pc.user.pojo.User;
 import com.manage.qinggong.pc.user.service.UserService;
 import org.slf4j.Logger;
@@ -22,18 +23,18 @@ public class UserController {
 
     @PostMapping(value = "/login")
     public Response login(User user){
-        if (user == null) return new Response("用户对象为空");
+        if (user == null) return new Response("用户对象为空", ErrorCode.ERROR);
         String userName = user.getUserName();
         String password = user.getPassword();
-        if (StringUtils.isEmpty(userName) || StringUtils.isEmpty(password)) return new Response("用户名或密码为空");
+        if (StringUtils.isEmpty(userName) || StringUtils.isEmpty(password)) return new Response("用户名或密码为空", ErrorCode.ERROR);
         User u = userService.findByName(userName);
         if (u != null){
             String password1 = u.getPassword();
-            if (StringUtils.isEmpty(password1)) return new Response("数据库用户密码为空");
-            if (password1.equals(password)) return new Response("登录成功",u);
-            return new Response("密码错误");
+            if (StringUtils.isEmpty(password1)) return new Response("数据库用户密码为空", ErrorCode.ERROR);
+            if (password1.equals(password)) return new Response("登录成功", ErrorCode.SUCCESS, u);
+            return new Response("密码错误", ErrorCode.ERROR);
         }
-        return new Response("该用户不存在");
+        return new Response("该用户不存在", ErrorCode.ERROR);
     }
 
 

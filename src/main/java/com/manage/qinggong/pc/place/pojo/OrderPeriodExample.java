@@ -235,63 +235,63 @@ public class OrderPeriodExample {
             return (Criteria) this;
         }
 
-        public Criteria andLimitIsNull() {
-            addCriterion("limit is null");
+        public Criteria andOrderLimitIsNull() {
+            addCriterion("order_limit is null");
             return (Criteria) this;
         }
 
-        public Criteria andLimitIsNotNull() {
-            addCriterion("limit is not null");
+        public Criteria andOrderLimitIsNotNull() {
+            addCriterion("order_limit is not null");
             return (Criteria) this;
         }
 
-        public Criteria andLimitEqualTo(Long value) {
-            addCriterion("limit =", value, "limit");
+        public Criteria andOrderLimitEqualTo(Long value) {
+            addCriterion("order_limit =", value, "orderLimit");
             return (Criteria) this;
         }
 
-        public Criteria andLimitNotEqualTo(Long value) {
-            addCriterion("limit <>", value, "limit");
+        public Criteria andOrderLimitNotEqualTo(Long value) {
+            addCriterion("order_limit <>", value, "orderLimit");
             return (Criteria) this;
         }
 
-        public Criteria andLimitGreaterThan(Long value) {
-            addCriterion("limit >", value, "limit");
+        public Criteria andOrderLimitGreaterThan(Long value) {
+            addCriterion("order_limit >", value, "orderLimit");
             return (Criteria) this;
         }
 
-        public Criteria andLimitGreaterThanOrEqualTo(Long value) {
-            addCriterion("limit >=", value, "limit");
+        public Criteria andOrderLimitGreaterThanOrEqualTo(Long value) {
+            addCriterion("order_limit >=", value, "orderLimit");
             return (Criteria) this;
         }
 
-        public Criteria andLimitLessThan(Long value) {
-            addCriterion("limit <", value, "limit");
+        public Criteria andOrderLimitLessThan(Long value) {
+            addCriterion("order_limit <", value, "orderLimit");
             return (Criteria) this;
         }
 
-        public Criteria andLimitLessThanOrEqualTo(Long value) {
-            addCriterion("limit <=", value, "limit");
+        public Criteria andOrderLimitLessThanOrEqualTo(Long value) {
+            addCriterion("order_limit <=", value, "orderLimit");
             return (Criteria) this;
         }
 
-        public Criteria andLimitIn(List<Long> values) {
-            addCriterion("limit in", values, "limit");
+        public Criteria andOrderLimitIn(List<Long> values) {
+            addCriterion("order_limit in", values, "orderLimit");
             return (Criteria) this;
         }
 
-        public Criteria andLimitNotIn(List<Long> values) {
-            addCriterion("limit not in", values, "limit");
+        public Criteria andOrderLimitNotIn(List<Long> values) {
+            addCriterion("order_limit not in", values, "orderLimit");
             return (Criteria) this;
         }
 
-        public Criteria andLimitBetween(Long value1, Long value2) {
-            addCriterion("limit between", value1, value2, "limit");
+        public Criteria andOrderLimitBetween(Long value1, Long value2) {
+            addCriterion("order_limit between", value1, value2, "orderLimit");
             return (Criteria) this;
         }
 
-        public Criteria andLimitNotBetween(Long value1, Long value2) {
-            addCriterion("limit not between", value1, value2, "limit");
+        public Criteria andOrderLimitNotBetween(Long value1, Long value2) {
+            addCriterion("order_limit not between", value1, value2, "orderLimit");
             return (Criteria) this;
         }
 

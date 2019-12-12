@@ -1,5 +1,6 @@
-package com.manage.qinggong.base;
+package com.manage.qinggong.base.utils;
 
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.*;
 
@@ -8,6 +9,11 @@ public class DateUtils {
     public static String dateToStr(Date date, String format){
         SimpleDateFormat sdf = new SimpleDateFormat(format);
         return sdf.format(date);
+    }
+
+    public static Date strToDate(String dateStr, String format) throws ParseException {
+        SimpleDateFormat sdf = new SimpleDateFormat(format);
+        return sdf.parse(dateStr);
     }
 
     public static Integer dayOfWeek(Date date){
@@ -31,6 +37,24 @@ public class DateUtils {
         return list;
     }
 
+    public static List<Date> beginAndEndOfDaySpec(Date date){
+        List<Date> list = new ArrayList<>();
+        cale.setTime(date);
+        cale.set(Calendar.HOUR_OF_DAY, 0);
+        cale.set(Calendar.MINUTE, 0);
+        cale.set(Calendar.SECOND, 0);
+        cale.set(Calendar.MILLISECOND, 0);
+        Date begin = cale.getTime();
+        cale.set(Calendar.HOUR_OF_DAY, 23);
+        cale.set(Calendar.MINUTE, 59);
+        cale.set(Calendar.SECOND, 59);
+        cale.set(Calendar.MILLISECOND, 999);
+        Date end = cale.getTime();
+        list.add(begin);
+        list.add(end);
+        return list;
+    }
+
     public static List<Date> beginAndEndOfMonth(){
         List<Date> list = new ArrayList<>();
         cale.add(Calendar.MONTH, 0);
@@ -45,10 +69,24 @@ public class DateUtils {
         return list;
     }
 
-    public static List<Date> beginAndEndOfYear(){
+    public static List<Date> beginAndEndOfMonthSpec(Date date){
         List<Date> list = new ArrayList<>();
-        Date now = new Date();
-        cale.setTime(now);
+        cale.setTime(date);
+        cale.add(Calendar.MONTH, 0);
+        cale.set(Calendar.DAY_OF_MONTH, 1);
+        Date begin = cale.getTime();
+
+        cale.add(Calendar.MONTH, 1);
+        cale.set(Calendar.DAY_OF_MONTH, 0);
+        Date end = cale.getTime();
+        list.add(begin);
+        list.add(end);
+        return list;
+    }
+
+    public static List<Date> beginAndEndOfYearSpec(Date year){
+        List<Date> list = new ArrayList<>();
+        cale.setTime(year);
         cale.set(Calendar.DAY_OF_YEAR, 1);
         Date begin = cale.getTime();
         cale.add(Calendar.YEAR, 1);

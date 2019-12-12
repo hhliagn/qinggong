@@ -19,11 +19,23 @@ public class Order {
 
     private Date orderDate;
 
+    private String orderDateStr;
+
     private String orderTime;
 
     private Integer status;
 
     private Date createTime;
+
+    private Long passed;
+
+    public String getOrderDateStr() {
+        return orderDateStr;
+    }
+
+    public void setOrderDateStr(String orderDateStr) {
+        this.orderDateStr = orderDateStr;
+    }
 
     public Integer getOrderId() {
         return orderId;
@@ -111,5 +123,13 @@ public class Order {
 
     public void setCreateTime(Date createTime) {
         this.createTime = createTime;
+    }
+
+    public Long getPassed() {
+        return passed;
+    }
+
+    public void setPassed(Long passed) {
+        this.passed = passed;
     }
 }

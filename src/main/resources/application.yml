@@ -1,5 +1,5 @@
 server:
-  port: 9999
+  port: 9998
 spring:
   datasource:
     url: jdbc:mysql://127.0.0.1:3306/qinggong?useUnicode=true&characterEncoding=utf8&useSSL=false
@@ -12,9 +12,18 @@ spring:
       max-active: 20
       min-idle: 5
       max-wait: 6000
+  http:
+    encoding:
+      force: true
+      charset: utf-8
+      enabled: true
 mybatis:
   mapper-locations: classpath:mapping/*.xml,classpath:mapping/*/*.xml
 logging:
   level:
     com.manage.qinggong:
       debug
+#verify:
+#  url:
+##    http://localhost:9999/order/decodeQR?orderUserName=%s&orderDateStr=%s&orderTime=%s
+#    http://192.168.0.182:9999/order/decodeQR?orderUserName=%s&orderDateStr=%s&orderTime=%s
