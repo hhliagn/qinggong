@@ -56,6 +56,7 @@ public class OrderController {
 
     /**
      * 二维码只传order_id
+     * 12-13 fix：前端根据返回的order_id生成二维码
      * @param order
      * @return
      */
@@ -63,19 +64,7 @@ public class OrderController {
     public Response submitOrder(Order order){
         if (order == null) return new Response("预约信息为空", ErrorCode.ERROR);
         Response flag = orderService.submitOrder(order);
-        if (flag.getCode() == 200) {
-            //生成二维码
-            Order order1 = new Order();
-            order1.setOrderId((Integer) flag.getData());
-            String jsonString = JSON.toJSONString(order1);
-            String path = null;
-            try {
-                path = QRCode.encode(jsonString, null);
-            } catch (Exception e) {
-                return new Response("生成二维码错误", ErrorCode.ERROR);
-            }
-            return new Response("提交预约成功", ErrorCode.SUCCESS, path);
-        }
+        if (flag.getCode() == 200) return new Response("提交预约成功", ErrorCode.SUCCESS, flag.getData());
         return flag;
     }
 }
