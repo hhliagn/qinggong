@@ -151,7 +151,9 @@ public class OrderService {
 
     public boolean verify(Order order) {
         Integer orderId = order.getOrderId();
-        Long orderCount = order.getOrderCount();
+        Order order2 = orderMapper.selectByPrimaryKey(orderId);
+        if (order2 == null) return false;
+        Long orderCount = order2.getOrderCount();
         if (orderId == null || orderId <= 0) return false;
         Object o = new Object();
         synchronized (o){
@@ -161,11 +163,10 @@ public class OrderService {
             passed = (Long) redisService.get(key);
             if (passed == null) passed = 0L;
             if (passed >= orderCount) {
-                Order order2 = orderMapper.selectByPrimaryKey(orderId);
-                if (order2 == null) return false;
                 order2.setStatus(1);
                 order2.setPassed(orderCount);
                 orderMapper.updateByPrimaryKeySelective(order2);
+                redisService.del(key);
                 return false;
             }
             passed ++;

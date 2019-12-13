@@ -32,8 +32,6 @@ public class PlaceSetupController {
         if (flag) return new Response("设置成功", ErrorCode.SUCCESS);
         return new Response("设置失败", ErrorCode.ERROR);
     }
-
-
 }
 
 

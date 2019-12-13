@@ -55,7 +55,7 @@ public class OrderController {
 //    }
 
     /**
-     * 二维码只传order_id
+     * 二维码只传 order_id
      * 12-13 fix：前端根据返回的order_id生成二维码
      * @param order
      * @return

@@ -66,10 +66,10 @@ public class StatsService {
         Date begin = dates.get(0);
         Date end = dates.get(1);
         criteria.andOrderDateBetween(begin, end);
-        criteria.andStatusEqualTo(0);
+//        criteria.andStatusEqualTo(0);
         if (type == 0) criteria.andOrderTypeEqualTo(0);
         else criteria.andOrderTypeEqualTo(1);
-        return orderMapper.countByExample(example);
+        return orderMapper.sumByExample(example);
     }
 
     public static void main(String[] args) throws ParseException {

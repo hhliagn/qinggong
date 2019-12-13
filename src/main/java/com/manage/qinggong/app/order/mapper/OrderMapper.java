@@ -9,4 +9,6 @@ import org.apache.ibatis.annotations.Param;
 public interface OrderMapper extends BaseMapper<Order, OrderExample, Integer> {
 
     Integer insertAndGet(Order order) ;
+
+    long sumByExample(OrderExample var1);
 }

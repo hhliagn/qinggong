@@ -283,6 +283,12 @@
       <include refid="Example_Where_Clause" />
     </if>
   </select>
+  <select id="sumByExample" parameterType="com.manage.qinggong.app.order.pojo.OrderExample" resultType="java.lang.Long">
+    select ( CASE WHEN sum( order_count ) IS NULL THEN 0 ELSE sum( order_count ) END ) from t_order
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
   <update id="updateByExampleSelective" parameterType="map">
     update t_order
     <set>
