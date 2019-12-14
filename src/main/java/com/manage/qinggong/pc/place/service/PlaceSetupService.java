@@ -1,5 +1,7 @@
 package com.manage.qinggong.pc.place.service;
 
+import com.manage.qinggong.base.pojo.ErrorCode;
+import com.manage.qinggong.base.pojo.Response;
 import com.manage.qinggong.pc.place.mapper.PlaceSetupMapper;
 import com.manage.qinggong.pc.place.pojo.PlaceSetup;
 import com.manage.qinggong.pc.place.pojo.PlaceSetupExample;
@@ -27,5 +29,10 @@ public class PlaceSetupService {
         placeSetup.setUpdateTime(new Date());
         int i = placeSetupMapper.updateByPrimaryKeySelective(placeSetup);
         return i > 0;
+    }
+
+    public Response find() {
+        PlaceSetup placeSetup = placeSetupMapper.selectByPrimaryKey(1);
+        return new Response("默认展馆设置", ErrorCode.SUCCESS, placeSetup);
     }
 }
