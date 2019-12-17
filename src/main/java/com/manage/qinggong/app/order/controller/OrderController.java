@@ -10,16 +10,12 @@ import com.manage.qinggong.base.utils.QRCode;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.CrossOrigin;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.Date;
 
 @RestController
 @RequestMapping("/order")
-@CrossOrigin(origins = "*",maxAge = 3600)
 public class OrderController {
 
     Logger logger = LoggerFactory.getLogger(this.getClass());
@@ -27,34 +23,20 @@ public class OrderController {
     @Autowired
     private OrderService orderService;
 
-//    @PostMapping(value = "")
-//    public Response submitOrder(Order order){
-//        if (order == null) return new Response("预约信息为空", ErrorCode.ERROR);
-//        Response flag = orderService.submitOrder(order);
-//        if (flag.getCode() == 200) {
-//            //生成二维码
-//            String userName = order.getOrderUserName();
-//            Date orderDate = order.getOrderDate();
-//            String date = DateUtils.dateToStr(orderDate, "yyyy-MM-dd");
-//            String orderTime = order.getOrderTime();
-//            Long orderCount = order.getOrderCount();
-//            Order order1 = new Order();
-//            order1.setOrderId((Integer) flag.getData());
-//            order1.setOrderDateStr(date);
-//            order1.setOrderTime(orderTime);
-//            order1.setOrderUserName(userName);
-//            order1.setOrderCount(orderCount);
-//            String jsonString = JSON.toJSONString(order1);
-//            String path = null;
-//            try {
-//                path = QRCode.encode(jsonString, null);
-//            } catch (Exception e) {
-//                return new Response("生成二维码错误", ErrorCode.ERROR);
-//            }
-//            return new Response("提交预约成功", ErrorCode.SUCCESS, path);
-//        }
-//        return flag;
-//    }
+    @GetMapping(value = "/generate")
+    public Response generate(@RequestParam("userName") String userName){
+        Order order1 = new Order();
+        order1.setOrderUserName(userName);
+        String jsonString = JSON.toJSONString(order1);
+        System.out.println(jsonString);
+        String path = null;
+        try {
+            path = QRCode.encode(jsonString, null);
+        } catch (Exception e) {
+            return new Response("生成二维码错误", ErrorCode.ERROR);
+        }
+        return new Response("生成永久二维码成功", ErrorCode.SUCCESS, path);
+    }
 
     /**
      * 二维码只传 order_id

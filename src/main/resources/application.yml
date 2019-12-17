@@ -39,10 +39,10 @@ logging:
     com.manage.qinggong:
       debug
 user:
-  prop: D:/user.txt
+  prop: D:/foshan_qinggong/users.txt
 #verify:
 #  url:
 ##    http://localhost:9999/order/decodeQR?orderUserName=%s&orderDateStr=%s&orderTime=%s
 #    http://192.168.0.182:9999/order/decodeQR?orderUserName=%s&orderDateStr=%s&orderTime=%s
 web:
-  upload-path: D:/ppp/
+  upload-path: D:/foshan_qinggong/
